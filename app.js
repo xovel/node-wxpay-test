@@ -81,7 +81,7 @@ app.get('/api/unifiedorder', function (req, res) {
     body: 'desc',
     mch_id: config.mch_id,
     nonce_str: createNonceStr(),
-    notify_url: config.notify_url,// 微信付款后的回调地址
+    notify_url: config.notify_url, // 微信付款后的回调地址
     openid: openid,
     out_trade_no: out_trade_no,
     spbill_create_ip: ip,
@@ -99,7 +99,7 @@ app.get('/api/unifiedorder', function (req, res) {
       res.json({ error: body });
     } else if (response.statusCode === 200) {
       let prepay_id = ''; // 预订单编号
-      // 微信返回的数据为 xml 格式， 需要装换为 json 数据， 便于使用
+      // 微信返回的数据为 xml 格式，需要进行解析
       xml2jsparseString(body, { async: true }, function (error, result) {
         prepay_id = result.xml.prepay_id[0]; // 获取预订单编号
         const paramWCPay = {
@@ -176,7 +176,7 @@ function getUnifiedOrderXml(obj) {
 
 // 签名算法
 function getSign(paramSign) {
-  // 按 key 值的ascii 排序
+  // 按 key 值的 ascii 排序
   const keys = Object.keys(paramSign).sort();
   const temp = [];
   keys.forEach(v => {
