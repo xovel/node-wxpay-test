@@ -1,0 +1,33 @@
+{
+  "name": "wxpay-test",
+  "version": "0.0.0",
+  "description": "基于 node 的微信公众号支付测试",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xovel/node-wxpay-test.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "wx",
+    "pay",
+    "wxpay"
+  ],
+  "author": "xovel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xovel/node-wxpay-test/issues"
+  },
+  "homepage": "https://github.com/xovel/node-wxpay-test#readme",
+  "dependencies": {
+    "body-parser-xml": "^1.1.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "request": "^2.83.0",
+    "xml2js": "^0.4.19"
+  }
+}
