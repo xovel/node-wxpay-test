@@ -2,7 +2,7 @@
 
 基于 node/express 的微信公众号支付测试
 
-## Requeirement
+## Requirement
 
 > 未做兼容性测试，本人测试使用的环境配置如下：
 
