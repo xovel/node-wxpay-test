@@ -13,21 +13,12 @@
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"
   />
 
-  <title>微信公众号支付测试</title>
-  <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-  <!-- <link rel="stylesheet" type="text/css" href="https://weui.io/weui.css"> -->
+  <title></title>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
   <link href="https://cdn.bootcss.com/weui/1.1.2/style/weui.css" rel="stylesheet">
   <style>
     #app {
       padding: 10px;
-    }
-
-    #device-info {
-      padding: 0;
-      padding-bottom: 10px;
-    }
-    .weui-cells {
-      margin-top: 0;
     }
 
     .weui-btn {
@@ -44,84 +35,70 @@
   <div id="app">
 
     <div class="weui-article" id="device-info">
-      <h1>图片展示</h1>
+      <h1>设备信息展示</h1>
       <img src="./d.png">
     </div>
 
     <div class="weui-cells weui-cells_radio">
       <label class="weui-cell weui-check__label" for="s1">
         <div class="weui-cell__bd">
-          <p>2 元 5 分钟</p>
+          <p>cell standard</p>
         </div>
         <div class="weui-cell__ft">
-          <input type="radio" class="weui-check" name="smc-radio" id="s1" checked="checked" />
+          <input type="radio" class="weui-check" name="radio1" id="s1" checked="checked" />
           <span class="weui-icon-checked"></span>
         </div>
       </label>
       <label class="weui-cell weui-check__label" for="s2">
         <div class="weui-cell__bd">
-          <p>3 元 10 分钟</p>
+          <p>cell standard</p>
         </div>
         <div class="weui-cell__ft">
-          <input type="radio" name="smc-radio" class="weui-check" id="s2" />
+          <input type="radio" name="radio1" class="weui-check" id="s2" />
           <span class="weui-icon-checked"></span>
         </div>
       </label>
       <label class="weui-cell weui-check__label" for="s3">
         <div class="weui-cell__bd">
-          <p>5 元 20 分钟</p>
+          <p>cell standard</p>
         </div>
         <div class="weui-cell__ft">
-          <input type="radio" name="smc-radio" class="weui-check" id="s3" />
+          <input type="radio" name="radio1" class="weui-check" id="s3" />
           <span class="weui-icon-checked"></span>
         </div>
       </label>
       <label class="weui-cell weui-check__label" for="s4">
         <div class="weui-cell__bd">
-          <p>10 元 60 分钟</p>
+          <p>cell standard</p>
         </div>
         <div class="weui-cell__ft">
-          <input type="radio" name="smc-radio" class="weui-check" id="s4" />
+          <input type="radio" name="radio1" class="weui-check" id="s4" />
           <span class="weui-icon-checked"></span>
         </div>
       </label>
     </div>
 
-    <a id="btn-select" href="javascript:;" class="weui-btn weui-btn_primary">选择</a>
+    <a id="showIOSActionSheet" href="javascript:;" class="weui-btn weui-btn_primary">选择</a>
 
-    <div class="smc-rule weui-cells weui-cells_checkbox" style="display: none">
-      <label class="weui-cell weui-check__label" for="s11">
-        <div class="weui-cell__hd">
-          <input type="checkbox" class="weui-check" name="checkbox1" id="s11" checked="checked" />
-          <i class="weui-icon-checked"></i>
-        </div>
-        <div class="weui-cell__bd">
-          <p>我同意用户使用协议</p>
-        </div>
-      </label>
-    </div>
-
-    <div class="weui-mask" id="smc-mask" style="display: none"></div>
-
-    <div class="weui-actionsheet" id="smc-action-sheet">
+    <div class="weui-mask" id="iosMask" style="display: none"></div>
+    <div class="weui-actionsheet" id="iosActionsheet">
       <div class="weui-actionsheet__title">
-        <p class="weui-actionsheet__title-text">请进行支付</p>
+        <p class="weui-actionsheet__title-text">当前选择的服务：</p>
       </div>
       <div class="weui-actionsheet__menu">
-        <div class="weui-actionsheet__cell" id="pay-java">微信支付(java端)</div>
-        <div class="weui-actionsheet__cell" id="pay-node">微信支付(node端)</div>
+        <div class="weui-actionsheet__cell" id="wxPay">微信支付</div>
       </div>
       <div class="weui-actionsheet__action">
-        <div class="weui-actionsheet__cell" id="btn-cancel">取消</div>
+        <div class="weui-actionsheet__cell" id="iosActionsheetCancel">取消</div>
       </div>
     </div>
 
     <div id="dialogs">
       <!--BEGIN dialog2-->
-        <div class="js_dialog" id="smc-dialog" style="display: none;">
+      <div class="js_dialog" id="iosDialog2" style="display: none;">
         <div class="weui-mask"></div>
         <div class="weui-dialog">
-        <div class="weui-dialog__bd" id="smc-result"></div>
+          <div class="weui-dialog__bd" id="payResult"></div>
           <div class="weui-dialog__ft">
             <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>
           </div>
@@ -131,7 +108,7 @@
     </div>
 
     <!-- loading toast -->
-    <div id="smc-loading" style="display:none;">
+    <div id="loadingToast" style="display:none;">
       <div class="weui-mask_transparent"></div>
       <div class="weui-toast">
         <i class="weui-loading weui-icon_toast"></i>
@@ -139,11 +116,12 @@
       </div>
     </div>
 
+
+
   </div>
 
   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
-  <!-- <script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.js"></script> -->
-  <script src="./d.js"></script>
+  <script src="./d2.js"></script>
 </body>
 
 </html>
